@@ -93,7 +93,7 @@ public class ESController {
     }
  
     @PostMapping("/pageSelect")
-    @ApiOperation("自定义查询 <高级版>")
+    @ApiOperation("自定义查询 <高级版>分页")
     public void selectCustom(@RequestBody pageQuery query){
     //public void selectCustom(String str){
         // 构建查询条件
