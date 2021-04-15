@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+<script src="../../js/jquery-1.8.3.js" 
+	type="text/javascript"></script>
+<script src="../../js/jquery.easyui.min.js" 
+	type="text/javascript"></script>
+</head>
+<body>
+	<div style="width: 500px;height: 300px;margin: 0 auto;border: 1px solid red;margin-top: 10%;">
+		<form id ="formId" method="post" enctype="multipart/form-data">
+			<table style="width: 100%;">
+				<tr>
+					<input type="hidden" name='fileName' id='fileName'/>
+				</tr>
+				<tr style="width: 100%;">
+					<td style="margin-left: 50px;">档号(2013000023):</td><td><input name="reference" id="reference" style="width: 230px;height: 20px;"/></td>
+				</tr>
+				<tr style="width: 100%;">
+					<td style="margin-left: 50px;">文件后缀(.png):</td><td><input name="suffix" id="suffix" style="width: 230px;height: 20px;"/></td>
+				</tr>
+				<tr>
+					<td>文件源路径:</td><td><input name="putPath" id="putPath" style="width: 230px;height: 20px;"/></td>
+				</tr>
+				<tr>
+					<td>文件输出路径:</td><td><input name="outPath" id="outPath" style="width: 230px;height: 20px;"/></td>
+				</tr>
+				<tr>
+					<td>存储路径(\2015\01\2017000023):</td><td><input name="url" id="url" style="width: 230px;height: 20px;"/></td>
+				</tr>
+				<tr>
+					
+					<td>选择文件:</td><td><input name="fileName" id="fileField" type="file" 
+						onchange="document.getElementById('fileName').value=this.value"/> </td>
+				</tr>
+				<tr>
+					<button style="position: absolute;width: 80px;height: 30px;margin-top: 250px;margin-left: 380px;" onclick="importData();">提交</button>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script type="text/javascript">
+		function importData(){
+			var fileName = $("#fileName").val();
+			alert(fileName);
+			var fileType=fileName.substring(fileName.lastIndexOf(".")).toUpperCase();
+			alert(fileType);
+			if(fileName == null || fileName ==""){
+	    		 /*notify("请选择要导入的智能电源I型文件","warn");*/
+				 $.messager.alert('提示', '请选择要导入文件');
+			 }else{
+				 if (fileType != ".XLS" && fileType != ".XLSX") {
+					 /*notify("文件限于xls格式和xlsx格式","warn");*/
+					alert("文件限于xls格式和xlsx格式！");
+					$("#fileName").val("");
+					alert("清除fileName");
+				}else{
+					$('#formId').form('submit',{
+						type:'post',
+						url:'../copy/dataCopy',
+						success: function (data) {
+					       /* $.messager.confirm('提示', data,function(){
+					    	   disLoad();
+					    	   window.location.href="../device/device.jsp"									       		 
+					       }); */
+					     },
+				       error: function (data) {
+				    	   /*notify(data,"error");*/
+		                    alert("有误");						                   
+		                }									       
+					});						
+				}
+				
+				 
+			 }
+		}
+	</script>
+</body>
+</html>

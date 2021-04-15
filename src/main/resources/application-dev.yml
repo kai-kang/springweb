@@ -1,0 +1,23 @@
+server:
+  port: 9080
+ 
+spring:
+  datasource:
+    username: root
+    password: 12345
+    #driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/snaker-web?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+ 
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.kangk.springweb.task.entity
+ 
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug
+        
+        
